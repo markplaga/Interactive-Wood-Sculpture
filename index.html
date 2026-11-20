@@ -10,11 +10,11 @@
 <svg width="0" height="0" style="position:absolute"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".018 .35" numOctaves="2" seed="9" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/></filter></svg>
 <main><h1>Interactive Wood Sculpture</h1><p>Design your 4 × 4 wood wall hanging. Each wooden square shows a real photographed wood panel with a painted straight stripe or a right-angle corner. Select a tile, change its pattern, and rotate it in 90° steps. Triple-tap a tile to switch between the two panel designs.</p>
 <div class="layout"><div class="board-wrap" id="exhibit" aria-label="Sculpture against selected wall color"><div id="board" class="board" role="group" aria-label="16 adjustable wooden tiles"></div></div>
-<aside><h2>Display options</h2><button class="control primary" id="maximize" style="width:100%">⛶ Maximize sculpture</button><div class="subhead">Wall color</div><div id="wallColors" class="wall-colors" role="group" aria-label="Choose wall background color"></div><div id="wallName" class="wall-name" aria-live="polite"></div><p class="foot">In maximized view, tap the surrounding wall to exit, or press Escape. On supported browsers, native fullscreen is used.</p><hr><h2>Selected wooden tile</h2><div id="readout" class="readout" aria-live="polite"></div>
+<aside><h2>Display options</h2><button class="control primary" id="maximize" style="width:100%">⛶ Maximize sculpture</button><div class="subhead">Wall color</div><div id="wallColors" class="wall-colors" role="group" aria-label="Choose wall background color"></div><div id="wallName" class="wall-name" aria-live="polite"></div><p class="foot">Tap the wall around the sculpture to cycle through all ten colors, even in maximized view. Press Escape to exit native fullscreen, or use your browser's fullscreen controls.</p><hr><h2>Selected wooden tile</h2><div id="readout" class="readout" aria-live="polite"></div>
 <div class="subhead">Painted pattern</div><div class="controls"><button class="control primary" id="straight">Straight stripe</button><button class="control primary" id="corner">Right angle</button></div>
 <div class="subhead">Orientation</div><div class="controls"><button class="control" id="left">↶ Rotate left 90°</button><button class="control" id="right">↷ Rotate right 90°</button></div>
 <div class="subhead">Whole sculpture</div><div class="controls"><button class="control" id="shuffle">Shuffle</button><button class="control" id="reset">Reset</button><button class="control" id="save">Save design</button><button class="control" id="load">Restore saved</button><button class="control" id="export">Export design</button><button class="control" id="clear">All straight</button></div>
-<div class="foot">Tip: Tap an unselected tile to select it. Tap the selected tile again to rotate it clockwise. Triple-tap a tile to switch between straight and corner designs. Your saved design stays in this browser. The wall color is saved separately.</div><div id="feedback" role="status"></div></aside></div><footer>Prototype for a physical, 16-tile wooden wall hanging. Tile arrangements are visual plans, not machining dimensions.</footer></main>
+<div class="foot">Tip: Tap an unselected tile to select it. Tap the selected tile again to rotate it clockwise. Triple-tap a tile to switch between straight and corner designs. Your saved design stays in this browser. The wall color is saved separately. Tap the surrounding wall to try the next color.</div><div id="feedback" role="status"></div></aside></div><footer>Prototype for a physical, 16-tile wooden wall hanging. Tile arrangements are visual plans, not machining dimensions.</footer></main>
 <script>
 const exhibit=document.querySelector('#exhibit');
 const board=document.querySelector('#board'),readout=document.querySelector('#readout'),feedback=document.querySelector('#feedback');
@@ -46,7 +46,13 @@ function setImmersive(on){immersive=on;document.body.classList.toggle('immersive
 maximize.onclick=async()=>{if(immersive){if(document.fullscreenElement){try{await document.exitFullscreen()}catch{}}setImmersive(false);return;}setImmersive(true);if(exhibit.requestFullscreen){try{await exhibit.requestFullscreen()}catch{/* CSS full-window fallback for iOS */}}};
 document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&immersive)setImmersive(false)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&immersive){if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});setImmersive(false)}});
-exhibit.addEventListener('click',e=>{if(immersive&&(e.target===exhibit)){if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});setImmersive(false)}});
+function nextWallColor(){
+  const current=wallColors.findIndex(c=>c.hex===wall.hex);
+  wall=wallColors[(current+1)%wallColors.length];
+  try{localStorage.setItem('wood-wall-color',wall.hex)}catch{}
+  paintWall();
+}
+exhibit.addEventListener('click',e=>{if(e.target===exhibit)nextWallColor()});
 const path={straight:'<path d="M50 0 V100" fill="none" stroke="#19212a" stroke-width="13"/>',corner:'<path d="M0 50 H50 V100" fill="none" stroke="#19212a" stroke-width="13" stroke-linejoin="miter"/>'};
 // Group rapid taps to distinguish a single rotation from a triple-tap pattern change.
 let pendingTile=-1, tapCount=0, tapTimer=null;

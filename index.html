@@ -5,12 +5,13 @@
 .tile{background:transparent}.tile:before{display:none}.tile:after{box-shadow:inset 1px 1px 1px #fff5,inset -2px -2px 4px #32201466}.paint img{display:block;width:100%;height:100%;object-fit:cover} 
 .wall-colors{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:10px 0}.wall-swatch{width:100%;aspect-ratio:1;border:2px solid #5b504344;border-radius:9px;cursor:pointer;box-shadow:inset 0 1px 2px #fff4}.wall-swatch.active{outline:3px solid #9d7535;outline-offset:2px}.wall-swatch:focus-visible{outline:3px solid #0060bc;outline-offset:2px}.wall-name{font-size:13px;color:#645342;margin-bottom:12px}.board-wrap{background:var(--wall-color,#F1E8D8);padding:clamp(14px,3vw,30px);display:flex;align-items:center;justify-content:center;transition:background .2s}.board{width:100%}.board-wrap:fullscreen{width:100vw;height:100dvh;max-width:none;max-height:none;padding:clamp(20px,5vmin,80px);border:0;border-radius:0;background:var(--wall-color,#F1E8D8);box-shadow:none}.board-wrap:fullscreen .board{width:min(84vw,84dvh);max-height:84dvh}.board-wrap:fullscreen .tile.selected,.immersive .tile.selected{outline:0}.immersive #exhibit{position:fixed;z-index:1000;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:clamp(20px,5vmin,80px);border:0;border-radius:0;box-shadow:none;background:var(--wall-color,#F1E8D8)}.immersive #exhibit .board{width:min(84vw,84dvh);max-height:84dvh}.immersive{overflow:hidden}@media(max-width:600px){.immersive #exhibit .board{width:min(94vw,84dvh)}.board-wrap:fullscreen .board{width:min(94vw,84dvh)}}
 .tile{touch-action:manipulation;-webkit-user-select:none;user-select:none} 
+#exhibit{position:relative}#exhibitClose{display:none;position:absolute;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));z-index:30;width:46px;height:46px;border:1px solid #ffffff70;border-radius:50%;background:#26231fbb;color:white;font:32px/1 system-ui;cursor:pointer;align-items:center;justify-content:center;transition:opacity .25s ease}#exhibitClose:focus-visible{outline:3px solid white;outline-offset:3px}.immersive #exhibitClose,.board-wrap:fullscreen #exhibitClose{display:flex}#exhibitClose.hidden{opacity:0;pointer-events:none}
 </style><!-- Nonvisual maintenance update: retrigger GitHub Pages deployment. -->
 </head><body>
 <svg width="0" height="0" style="position:absolute"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".018 .35" numOctaves="2" seed="9" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/></filter></svg>
 <main><h1>Interactive Wood Sculpture</h1><p>Design your 4 × 4 wood wall hanging. Each wooden square shows a real photographed wood panel with a painted straight stripe or a right-angle corner. Select a tile, change its pattern, and rotate it in 90° steps. Triple-tap a tile to switch between the two panel designs.</p>
-<div class="layout"><div class="board-wrap" id="exhibit" aria-label="Sculpture against selected wall color"><div id="board" class="board" role="group" aria-label="16 adjustable wooden tiles"></div></div>
-<aside><h2>Display options</h2><button class="control primary" id="maximize" style="width:100%">⛶ Maximize sculpture</button><div class="subhead">Wall color</div><div id="wallColors" class="wall-colors" role="group" aria-label="Choose wall background color"></div><div id="wallName" class="wall-name" aria-live="polite"></div><p class="foot">Tap the wall once to change its color. Double-tap the wall to exit maximized view. Escape or your browser's fullscreen controls also work.</p><hr><h2>Selected wooden tile</h2><div id="readout" class="readout" aria-live="polite"></div>
+<div class="layout"><div class="board-wrap" id="exhibit" aria-label="Sculpture against selected wall color"><div id="board" class="board" role="group" aria-label="16 adjustable wooden tiles"></div><button type="button" id="exhibitClose" aria-label="Close maximized view" title="Close maximized view">×</button></div>
+<aside><h2>Display options</h2><button class="control primary" id="maximize" style="width:100%">⛶ Maximize sculpture</button><div class="subhead">Wall color</div><div id="wallColors" class="wall-colors" role="group" aria-label="Choose wall background color"></div><div id="wallName" class="wall-name" aria-live="polite"></div><p class="foot">Tap the wall once to change its color and reveal the close button for five seconds. Double-tap the wall or press the × button to exit maximized view.</p><hr><h2>Selected wooden tile</h2><div id="readout" class="readout" aria-live="polite"></div>
 <div class="subhead">Painted pattern</div><div class="controls"><button class="control primary" id="straight">Straight stripe</button><button class="control primary" id="corner">Right angle</button></div>
 <div class="subhead">Orientation</div><div class="controls"><button class="control" id="left">↶ Rotate left 90°</button><button class="control" id="right">↷ Rotate right 90°</button></div>
 <div class="subhead">Whole sculpture</div><div class="controls"><button class="control" id="shuffle">Shuffle</button><button class="control" id="reset">Reset</button><button class="control" id="save">Save design</button><button class="control" id="load">Restore saved</button><button class="control" id="export">Export design</button><button class="control" id="clear">All straight</button></div>
@@ -41,8 +42,22 @@ for(const c of wallColors){const b=document.createElement('button');b.type='butt
 }
 paintWall();
 const maximize=document.querySelector('#maximize');
-let immersive=false;
-function setImmersive(on){immersive=on;document.body.classList.toggle('immersive',on);maximize.textContent=on?'Exit maximized view':'⛶ Maximize sculpture'}
+const exhibitClose=document.querySelector('#exhibitClose');
+let immersive=false,closeHideTimer=null;
+function revealCloseButton(){
+  if(!immersive)return;
+  exhibitClose.classList.remove('hidden');
+  clearTimeout(closeHideTimer);
+  closeHideTimer=setTimeout(()=>exhibitClose.classList.add('hidden'),5000);
+}
+function setImmersive(on){
+  immersive=on;
+  document.body.classList.toggle('immersive',on);
+  maximize.textContent=on?'Exit maximized view':'⛶ Maximize sculpture';
+  clearTimeout(closeHideTimer);
+  if(on){revealCloseButton();}
+  else{exhibitClose.classList.add('hidden');}
+}
 maximize.onclick=async()=>{if(immersive){if(document.fullscreenElement){try{await document.exitFullscreen()}catch{}}setImmersive(false);return;}setImmersive(true);if(exhibit.requestFullscreen){try{await exhibit.requestFullscreen()}catch{/* CSS full-window fallback for iOS */}}};
 document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&immersive)setImmersive(false)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&immersive){if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});setImmersive(false)}});
@@ -59,8 +74,10 @@ function exitMaximizedView(){
   if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
   setImmersive(false);
 }
+exhibitClose.addEventListener('click',e=>{e.stopPropagation();exitMaximizedView()});
 exhibit.addEventListener('click',e=>{
   if(e.target!==exhibit)return; // Never interfere with wooden tile clicks.
+  revealCloseButton();
   if(wallTapTimer!==null){
     clearTimeout(wallTapTimer);
     wallTapTimer=null;

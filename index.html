@@ -6,16 +6,17 @@
 .wall-colors{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:10px 0}.wall-swatch{width:100%;aspect-ratio:1;border:2px solid #5b504344;border-radius:9px;cursor:pointer;box-shadow:inset 0 1px 2px #fff4}.wall-swatch.active{outline:3px solid #9d7535;outline-offset:2px}.wall-swatch:focus-visible{outline:3px solid #0060bc;outline-offset:2px}.wall-name{font-size:13px;color:#645342;margin-bottom:12px}.board-wrap{background:var(--wall-color,#F1E8D8);padding:clamp(14px,3vw,30px);display:flex;align-items:center;justify-content:center;transition:background .2s}.board{width:100%}.board-wrap:fullscreen{width:100vw;height:100dvh;max-width:none;max-height:none;padding:clamp(20px,5vmin,80px);border:0;border-radius:0;background:var(--wall-color,#F1E8D8);box-shadow:none}.board-wrap:fullscreen .board{width:min(84vw,84dvh);max-height:84dvh}.board-wrap:fullscreen .tile.selected,.immersive .tile.selected{outline:0}.immersive #exhibit{position:fixed;z-index:1000;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:clamp(20px,5vmin,80px);border:0;border-radius:0;box-shadow:none;background:var(--wall-color,#F1E8D8)}.immersive #exhibit .board{width:min(84vw,84dvh);max-height:84dvh}.immersive{overflow:hidden}@media(max-width:600px){.immersive #exhibit .board{width:min(94vw,84dvh)}.board-wrap:fullscreen .board{width:min(94vw,84dvh)}}
 .grid-size-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 18px}.grid-size-options button.active{background:#4d3825;color:white;border-color:#4d3825}.tile{touch-action:manipulation;-webkit-user-select:none;user-select:none} 
 #exhibit{position:relative}#exhibitClose{display:none;position:absolute;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));z-index:30;width:46px;height:46px;border:1px solid #ffffff70;border-radius:50%;background:#26231fbb;color:white;font:32px/1 system-ui;cursor:pointer;align-items:center;justify-content:center;transition:opacity .25s ease}#exhibitClose:focus-visible{outline:3px solid white;outline-offset:3px}.immersive #exhibitClose,.board-wrap:fullscreen #exhibitClose{display:flex}#exhibitClose.hidden{opacity:0;pointer-events:none}
+.pattern-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.pattern-controls button{font-size:13px}.config-select,.config-name{display:block;width:100%;padding:12px;border:1px solid #b9a382;border-radius:8px;background:#fffaf1;color:#322718;font:inherit;margin:7px 0 14px}.config-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.config-actions #deleteConfig{grid-column:1/-1}label.subhead{display:block} 
 </style><!-- Nonvisual maintenance update: retrigger GitHub Pages deployment. -->
 </head><body>
 <svg width="0" height="0" style="position:absolute"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".018 .35" numOctaves="2" seed="9" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/></filter></svg>
-<main><h1>Interactive Wood Sculpture</h1><p>Design your wood wall hanging in a 3 × 3, 4 × 4, or 5 × 5 grid. Each wooden square shows a real photographed wood panel with a painted straight stripe or a right-angle corner. Select a tile, change its pattern, and rotate it in 90° steps. Triple-tap a tile to switch between the two panel designs.</p>
+<main><h1>Interactive Wood Sculpture</h1><p>Design your wood wall hanging in a 3 × 3, 4 × 4, or 5 × 5 grid. Each wooden square shows a real photographed wood panel with a painted straight stripe or a right-angle corner. Select a tile, change its pattern, and rotate it in 90° steps. Triple-tap a tile to cycle through the straight, corner, and blank wood panels.</p>
 <div class="layout"><div class="board-wrap" id="exhibit" aria-label="Sculpture against selected wall color"><div id="board" class="board" role="group" aria-label="16 adjustable wooden tiles"></div><button type="button" id="exhibitClose" aria-label="Close maximized view" title="Close maximized view">×</button></div>
 <aside><h2>Display options</h2><div class="subhead">Grid size</div><div class="grid-size-options" role="group" aria-label="Grid size"><button type="button" class="control" data-grid-size="3">3 × 3</button><button type="button" class="control" data-grid-size="4">4 × 4</button><button type="button" class="control" data-grid-size="5">5 × 5</button></div><button class="control primary" id="maximize" style="width:100%">⛶ Maximize sculpture</button><div class="subhead">Wall color</div><div id="wallColors" class="wall-colors" role="group" aria-label="Choose wall background color"></div><div id="wallName" class="wall-name" aria-live="polite"></div><p class="foot">Tap the wall once to change its color and reveal the close button for five seconds. Double-tap the wall or press the × button to exit maximized view.</p><hr><h2>Selected wooden tile</h2><div id="readout" class="readout" aria-live="polite"></div>
-<div class="subhead">Painted pattern</div><div class="controls"><button class="control primary" id="straight">Straight stripe</button><button class="control primary" id="corner">Right angle</button></div>
+<div class="subhead">Wood panel design</div><div class="pattern-controls"><button class="control primary" id="straight">Straight stripe</button><button class="control primary" id="corner">Right angle</button><button class="control primary" id="blank">Blank wood</button></div>
 <div class="subhead">Orientation</div><div class="controls"><button class="control" id="left">↶ Rotate left 90°</button><button class="control" id="right">↷ Rotate right 90°</button></div>
 <div class="subhead">Whole sculpture</div><div class="controls"><button class="control" id="shuffle">Shuffle</button><button class="control" id="reset">Reset</button><button class="control" id="save">Save design</button><button class="control" id="load">Restore saved</button><button class="control" id="export">Export design</button><button class="control" id="clear">All straight</button></div>
-<div class="foot">Tip: Tap an unselected tile to select it. Tap the selected tile again to rotate it clockwise. Triple-tap a tile to switch between straight and corner designs. Your saved design stays in this browser. The wall color is saved separately. Tap the surrounding wall to try the next color.</div><div id="feedback" role="status"></div></aside></div><footer>Prototype for a physical, configurable wooden wall hanging. Tile arrangements are visual plans, not machining dimensions.</footer></main>
+<hr><h2>Saved configurations</h2><label class="subhead" for="configSelect">Choose a design</label><select id="configSelect" class="config-select" aria-label="Saved configurations"><option value="">Select saved design…</option></select><label class="subhead" for="configName">Configuration name</label><input id="configName" class="config-name" type="text" maxlength="70" placeholder="e.g. Flowing River"><div class="config-actions"><button type="button" class="control primary" id="saveNamed">Save to device</button><button type="button" class="control" id="loadNamed">Load selected</button><button type="button" class="control" id="downloadConfig">Download settings file</button><button type="button" class="control" id="importConfig">Import settings file</button><button type="button" class="control" id="deleteConfig">Delete selected</button></div><input id="importFile" type="file" accept=".json,application/json" hidden><p class="foot">Saved designs remain in this browser on this device. Download a JSON settings file to back them up or move them to another device.</p><div class="foot">Tip: Tap an unselected tile to select it. Tap the selected tile again to rotate it clockwise. Triple-tap a tile to cycle through straight, corner, and blank designs. Your saved design stays in this browser. The wall color is saved separately. Tap the surrounding wall to try the next color.</div><div id="feedback" role="status"></div></aside></div><footer>Prototype for a physical, configurable wooden wall hanging. Tile arrangements are visual plans, not machining dimensions.</footer></main>
 <script>
 const exhibit=document.querySelector('#exhibit');
 const board=document.querySelector('#board'),readout=document.querySelector('#readout'),feedback=document.querySelector('#feedback');
@@ -112,7 +113,7 @@ function applyTaps(){
   pendingTile=-1;tapCount=0;tapTimer=null;
   if(i<0)return;
   if(count>=3){
-    tiles[i].pattern=tiles[i].pattern==='straight'?'corner':'straight';
+    tiles[i].pattern=tiles[i].pattern==='straight'?'corner':tiles[i].pattern==='corner'?'blank':'straight';
     selected=i;
   }else if(selected!==i){
     selected=i;
@@ -129,17 +130,83 @@ function handleTileTap(i){
   if(tapCount===3){applyTaps();return;}
   tapTimer=setTimeout(applyTaps,390);
 }
-function draw(){board.style.setProperty('--grid-size',gridSize);board.setAttribute('aria-label',gridSize+' by '+gridSize+' interactive wooden tiles');gridSizeButtons.forEach(b=>{const active=Number(b.dataset.gridSize)===gridSize;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});board.replaceChildren();tiles.forEach((t,i)=>{const b=document.createElement('button');b.className='tile'+(i===selected?' selected':'');b.type='button';b.setAttribute('aria-label',`Tile ${i+1}: ${t.pattern}, ${t.rotation} degrees`);b.innerHTML='<span class="paint" style="--angle:'+t.rotation+'deg"><img src="assets/'+(t.pattern==='straight'?'straight-panel.jpg':'corner-panel.jpg')+'" alt="" draggable="false"></span>';b.addEventListener('click',()=>handleTileTap(i));board.append(b)});const t=tiles[selected];readout.textContent=`Tile ${selected+1} of ${tiles.length} · ${t.pattern==='straight'?'Straight stripe':'Right angle'} · ${t.rotation}°`;}
+function draw(){board.style.setProperty('--grid-size',gridSize);board.setAttribute('aria-label',gridSize+' by '+gridSize+' interactive wooden tiles');gridSizeButtons.forEach(b=>{const active=Number(b.dataset.gridSize)===gridSize;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active))});board.replaceChildren();tiles.forEach((t,i)=>{const b=document.createElement('button');b.className='tile'+(i===selected?' selected':'');b.type='button';b.setAttribute('aria-label',`Tile ${i+1}: ${t.pattern}, ${t.rotation} degrees`);b.innerHTML='<span class="paint" style="--angle:'+t.rotation+'deg"><img src="assets/'+(t.pattern==='straight'?'straight-panel.jpg':t.pattern==='corner'?'corner-panel.jpg':'blank-panel.jpg')+'" alt="" draggable="false"></span>';b.addEventListener('click',()=>handleTileTap(i));board.append(b)});const t=tiles[selected];readout.textContent=`Tile ${selected+1} of ${tiles.length} · ${t.pattern==='straight'?'Straight stripe':t.pattern==='corner'?'Right angle':'Blank wood'} · ${t.rotation}°`;}
 function change(f){f(tiles[selected]);draw();feedback.textContent='';}
 document.querySelector('#straight').onclick=()=>change(t=>t.pattern='straight');
 document.querySelector('#corner').onclick=()=>change(t=>t.pattern='corner');
+document.querySelector('#blank').onclick=()=>change(t=>t.pattern='blank');
 document.querySelector('#left').onclick=()=>change(t=>t.rotation=(t.rotation+270)%360);
 document.querySelector('#right').onclick=()=>change(t=>t.rotation=(t.rotation+90)%360);
 document.querySelector('#shuffle').onclick=()=>{tiles=tiles.map(()=>({pattern:Math.random()<.5?'straight':'corner',rotation:Math.floor(Math.random()*4)*90}));draw()};
 document.querySelector('#reset').onclick=()=>{tiles=makeTiles(gridSize);layouts[gridSize]=tiles;selected=0;draw()};
 document.querySelector('#clear').onclick=()=>{tiles=tiles.map(()=>({pattern:'straight',rotation:0}));draw()};
 document.querySelector('#save').onclick=()=>{try{localStorage.setItem('wood-sculpture-v2',JSON.stringify({gridSize,layouts:{...layouts,[gridSize]:tiles}}));feedback.textContent='Saved to this browser.'}catch{feedback.textContent='Browser storage unavailable.'}};
-document.querySelector('#load').onclick=()=>{try{const saved=localStorage.getItem('wood-sculpture-v2');const a=saved?JSON.parse(saved):null;const valid=t=>Array.isArray(t)&&t.every(x=>['corner','straight'].includes(x.pattern)&&[0,90,180,270].includes(x.rotation));if(a&&[3,4,5].includes(a.gridSize)&&a.layouts&&[3,4,5].every(n=>valid(a.layouts[n])&&a.layouts[n].length===n*n)){for(const n of [3,4,5])layouts[n]=a.layouts[n];gridSize=a.gridSize;tiles=layouts[gridSize];selected=0;draw();feedback.textContent='Design restored.'}else{const old=JSON.parse(localStorage.getItem('wood-sculpture-v1'));if(valid(old)&&old.length===16){layouts[4]=old;gridSize=4;tiles=old;selected=0;draw();feedback.textContent='Saved 4 × 4 design restored.'}else feedback.textContent='No saved design found.'}}catch{feedback.textContent='No valid saved design found.'}};
+document.querySelector('#load').onclick=()=>{try{const saved=localStorage.getItem('wood-sculpture-v2');const a=saved?JSON.parse(saved):null;const valid=t=>Array.isArray(t)&&t.every(x=>['corner','straight','blank'].includes(x.pattern)&&[0,90,180,270].includes(x.rotation));if(a&&[3,4,5].includes(a.gridSize)&&a.layouts&&[3,4,5].every(n=>valid(a.layouts[n])&&a.layouts[n].length===n*n)){for(const n of [3,4,5])layouts[n]=a.layouts[n];gridSize=a.gridSize;tiles=layouts[gridSize];selected=0;draw();feedback.textContent='Design restored.'}else{const old=JSON.parse(localStorage.getItem('wood-sculpture-v1'));if(valid(old)&&old.length===16){layouts[4]=old;gridSize=4;tiles=old;selected=0;draw();feedback.textContent='Saved 4 × 4 design restored.'}else feedback.textContent='No saved design found.'}}catch{feedback.textContent='No valid saved design found.'}};
 document.querySelector('#export').onclick=()=>{const data=JSON.stringify({name:'Interactive Wood Sculpture',grid:[gridSize,gridSize],tiles:tiles.map((t,i)=>({tile:i+1,...t}))},null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='wood-sculpture-design.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);feedback.textContent='Design exported.'};
+
+// Named configurations are independent snapshots of all three grid layouts and wall color.
+const CONFIG_STORAGE_KEY='wood-sculpture-configurations-v1';
+const configSelect=document.querySelector('#configSelect'),configName=document.querySelector('#configName');
+const importFile=document.querySelector('#importFile');
+function validTiles(a,n){return Array.isArray(a)&&a.length===n*n&&a.every(t=>t&&['straight','corner','blank'].includes(t.pattern)&&[0,90,180,270].includes(t.rotation))}
+function validateSettings(obj){
+ if(!obj||![3,4,5].includes(obj.gridSize)||!obj.layouts||![3,4,5].every(n=>validTiles(obj.layouts[n],n))||!wallColors.some(c=>c.hex===obj.wallColor))throw new Error('Invalid or incompatible settings file');
+ return obj;
+}
+function snapshot(){
+ return {format:'interactive-wood-sculpture',version:1,gridSize,wallColor:wall.hex,layouts:Object.fromEntries([3,4,5].map(n=>[n,layouts[n].map(t=>({pattern:t.pattern,rotation:t.rotation}))]))};
+}
+function applySettings(a){
+ const obj=validateSettings(a);
+ for(const n of [3,4,5])layouts[n]=obj.layouts[n].map(t=>({...t}));
+ gridSize=obj.gridSize;tiles=layouts[gridSize];selected=0;
+ wall=wallColors.find(c=>c.hex===obj.wallColor);
+ try{localStorage.setItem('wood-wall-color',wall.hex);localStorage.setItem('wood-grid-size',String(gridSize))}catch{}
+ paintWall();draw();
+}
+function savedConfigurations(){try{const a=JSON.parse(localStorage.getItem(CONFIG_STORAGE_KEY)||'{}');return a&&typeof a==='object'&&!Array.isArray(a)?a:{}}catch{return {}}}
+function refreshConfigList(selectedName=''){
+ const configs=savedConfigurations();configSelect.replaceChildren();
+ const placeholder=document.createElement('option');placeholder.value='';placeholder.textContent='Select saved design…';configSelect.append(placeholder);
+ for(const name of Object.keys(configs).sort((a,b)=>a.localeCompare(b))){const o=document.createElement('option');o.value=name;o.textContent=name;configSelect.append(o)}
+ configSelect.value=configs[selectedName]?selectedName:'';
+}
+function persistConfigurations(configs){localStorage.setItem(CONFIG_STORAGE_KEY,JSON.stringify(configs))}
+function downloadSettings(data,name){
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+ const link=document.createElement('a'),url=URL.createObjectURL(blob);
+ link.href=url;link.download=(name||'wood-sculpture').replace(/[^a-z0-9 _-]/gi,'').trim().replace(/\s+/g,'-')+'.json';link.click();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+configSelect.addEventListener('change',()=>{if(configSelect.value)configName.value=configSelect.value});
+document.querySelector('#saveNamed').onclick=()=>{
+ const name=configName.value.trim();if(!name){feedback.textContent='Enter a name for this configuration.';configName.focus();return}
+ try{const configs=savedConfigurations();configs[name]=snapshot();persistConfigurations(configs);refreshConfigList(name);feedback.textContent='Saved “'+name+'” to this device.'}catch{feedback.textContent='Could not save in browser storage. Download a settings file instead.'}
+};
+document.querySelector('#loadNamed').onclick=()=>{
+ const name=configSelect.value;if(!name){feedback.textContent='Choose a saved configuration first.';return}
+ try{applySettings(savedConfigurations()[name]);feedback.textContent='Loaded “'+name+'”.'}catch(e){feedback.textContent=e.message||'Could not load configuration.'}
+};
+document.querySelector('#deleteConfig').onclick=()=>{
+ const name=configSelect.value;if(!name){feedback.textContent='Choose a saved configuration to delete.';return}
+ if(!confirm('Delete saved configuration “'+name+'” from this browser?'))return;
+ try{const configs=savedConfigurations();delete configs[name];persistConfigurations(configs);refreshConfigList();feedback.textContent='Deleted “'+name+'”.'}catch{feedback.textContent='Unable to delete saved configuration.'}
+};
+document.querySelector('#downloadConfig').onclick=()=>{
+ const name=configName.value.trim()||configSelect.value||'wood-sculpture-settings';
+ downloadSettings({name,settings:snapshot()},name);feedback.textContent='Settings downloaded.';
+};
+document.querySelector('#importConfig').onclick=()=>importFile.click();
+importFile.addEventListener('change',async()=>{
+ const file=importFile.files&&importFile.files[0];if(!file)return;
+ try{const a=JSON.parse(await file.text());const settings=a.settings||a;validateSettings(settings);applySettings(settings);
+ const name=typeof a.name==='string'&&a.name.trim()?a.name.trim().slice(0,70):file.name.replace(/\.json$/i,'').slice(0,70);
+ configName.value=name;
+ try{const configs=savedConfigurations();configs[name]=snapshot();persistConfigurations(configs);refreshConfigList(name);feedback.textContent='Imported and saved “'+name+'”.'}catch{feedback.textContent='Imported design. Local storage was unavailable.'}
+ }catch(e){feedback.textContent=e.message||'Could not import the settings file.'}
+ importFile.value='';
+});
+refreshConfigList();
+
 draw();
 </script></body></html>

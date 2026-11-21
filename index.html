@@ -198,7 +198,6 @@ function processStrokePosition(x,y){
 board.addEventListener('pointerdown',e=>{
   if(e.button!==0||stroke)return;
   const tile=e.target.closest('.tile');if(!tile||!board.contains(tile))return;
-  if(pendingTile!==-1){clearTimeout(tapTimer);pendingTile=-1;tapCount=0;tapTimer=null}
   const index=Array.prototype.indexOf.call(board.children,tile);
   if(index<0)return;
   stroke={pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,lastX:e.clientX,lastY:e.clientY,path:[index],moved:false};
@@ -206,7 +205,7 @@ board.addEventListener('pointerdown',e=>{
 document.addEventListener('pointermove',e=>{
   if(!stroke||e.pointerId!==stroke.pointerId)return;
   if(!stroke.moved&&Math.hypot(e.clientX-stroke.startX,e.clientY-stroke.startY)<12)return;
-  if(!stroke.moved){stroke.moved=true;board.classList.add('drawing');}
+  if(!stroke.moved){stroke.moved=true;board.classList.add('drawing');if(pendingTile!==-1){clearTimeout(tapTimer);pendingTile=-1;tapCount=0;tapTimer=null}}
   if(e.cancelable)e.preventDefault();
   processStrokePosition(e.clientX,e.clientY);
 },{passive:false});

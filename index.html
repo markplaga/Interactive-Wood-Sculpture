@@ -4,19 +4,19 @@
 :root{font-family:system-ui,-apple-system,sans-serif;color:#29241c;background:#f5f0e7}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 40% 0%,#fffefb,#ede5d7);min-height:100vh}main{max-width:1060px;margin:auto;padding:20px 18px 60px}h1{font-size:clamp(25px,4vw,42px);margin:10px 0 5px}p{color:#625646;line-height:1.5}.layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,1fr);gap:25px;align-items:start;margin-top:20px}@media(max-width:750px){.layout{grid-template-columns:1fr}}.board-wrap{padding:15px;border-radius:14px;background:#fdfbf6;box-shadow:0 7px 30px #523e2419;border:2px solid #b7a17f}.board{--wood:#a77d4b;display:grid;grid-template-columns:repeat(var(--grid-size,4),minmax(0,1fr));gap:clamp(5px,1.1vw,12px);padding:14px;background:linear-gradient(125deg,#67472b,#a77d4b 32%,#89623b 63%,#654225);border:8px ridge #795632;box-shadow:inset 1px 2px 8px #2413016b;aspect-ratio:1}.tile{position:relative;aspect-ratio:1;overflow:hidden;border:0;padding:0;cursor:pointer;background:linear-gradient(140deg,#c98b47 0%,#efc281 16%,#d7a162 40%,#eec58b 55%,#ca9050 75%,#e8b579);box-shadow:inset 1px 1px 2px #fff6,inset -2px -3px 5px #714b2866,1px 2px 4px #2215089c;border-radius:2px;isolation:isolate}.tile:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.38;background:repeating-linear-gradient(1deg,transparent 0px,#955b231c 1px,transparent 3px,transparent 8px,#774f251d 9px,transparent 12px),repeating-linear-gradient(177deg,transparent 0px,#fff7d51a 2px,transparent 6px,transparent 15px);filter:url(#grain)}.tile:after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 2px 2px 3px #fff9,inset -3px -3px 5px #603f2866}.paint{position:absolute;inset:0;transform:rotate(var(--angle));pointer-events:none}.paint svg{display:block;width:100%;height:100%;filter:drop-shadow(1px 1px 0 #17130e38)}.tile.selected{outline:5px solid #f4d45c;outline-offset:-5px;z-index:2}.tile:focus-visible{outline:5px solid #1e63aa;outline-offset:-5px}aside{background:#fffdf9;border:2px solid #c7ad83;border-radius:14px;padding:20px;box-shadow:0 5px 25px #6c50301a}h2{margin:0 0 15px;font-size:22px}.readout{padding:12px;background:#faf2e2;border:1px solid #d9bc8b;border-radius:7px;margin-bottom:18px;line-height:1.6}.controls{display:grid;grid-template-columns:1fr 1fr;gap:9px}button.control{cursor:pointer;border:1px solid #b9a382;padding:11px 8px;border-radius:8px;background:#f8f1e4;color:#322718;font-weight:650;font-size:14px}button.control:hover{background:#eddfc6}button.primary{background:#4d3825;color:white;border-color:#4d3825}button.primary:hover{background:#624b35}.subhead{margin:19px 0 9px;font-weight:700}.foot{font-size:13px;color:#796c5d;margin-top:14px}.gallery{display:flex;gap:12px;margin:14px 0}.swatch{width:75px;height:75px;border:5px solid #a77d4b;background:#e3af6c;position:relative;display:grid;place-items:center}.swatch svg{width:100%;height:100%}.tag{position:absolute;top:4px;left:6px;font-size:10px;color:#503819}.buttons-wide{display:grid;grid-template-columns:1fr 1fr;gap:9px}#feedback{min-height:20px;font-size:13px;color:#6d542d}footer{margin:26px 0 0;color:#877760;font-size:13px}
 .tile{background:transparent}.tile:before{display:none}.tile:after{box-shadow:inset 1px 1px 1px #fff5,inset -2px -2px 4px #32201466}.paint img{display:block;width:100%;height:100%;object-fit:cover} 
 .wall-colors{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:10px 0}.wall-swatch{width:100%;aspect-ratio:1;border:2px solid #5b504344;border-radius:9px;cursor:pointer;box-shadow:inset 0 1px 2px #fff4}.wall-swatch.active{outline:3px solid #9d7535;outline-offset:2px}.wall-swatch:focus-visible{outline:3px solid #0060bc;outline-offset:2px}.wall-name{font-size:13px;color:#645342;margin-bottom:12px}.board-wrap{background:var(--wall-color,#F1E8D8);padding:clamp(14px,3vw,30px);display:flex;align-items:center;justify-content:center;transition:background .2s}.board{width:100%}.board-wrap:fullscreen{width:100vw;height:100dvh;max-width:none;max-height:none;padding:clamp(20px,5vmin,80px);border:0;border-radius:0;background:var(--wall-color,#F1E8D8);box-shadow:none}.board-wrap:fullscreen .board{width:min(84vw,84dvh);max-height:84dvh}.board-wrap:fullscreen .tile.selected,.immersive .tile.selected{outline:0}.immersive #exhibit{position:fixed;z-index:1000;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:clamp(20px,5vmin,80px);border:0;border-radius:0;box-shadow:none;background:var(--wall-color,#F1E8D8)}.immersive #exhibit .board{width:min(84vw,84dvh);max-height:84dvh}.immersive{overflow:hidden}@media(max-width:600px){.immersive #exhibit .board{width:min(94vw,84dvh)}.board-wrap:fullscreen .board{width:min(94vw,84dvh)}}
-.grid-size-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 18px}.grid-size-options button.active{background:#4d3825;color:white;border-color:#4d3825}.tile{touch-action:manipulation;-webkit-user-select:none;user-select:none} 
+.grid-size-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 18px}.grid-size-options button.active{background:#4d3825;color:white;border-color:#4d3825}.board,.tile{touch-action:none;-webkit-user-select:none;user-select:none}.board.drawing .tile{cursor:crosshair}.board.drawing{outline:3px solid #eac76a;outline-offset:2px} 
 #exhibit{position:relative}#exhibitClose{display:none;position:absolute;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));z-index:30;width:46px;height:46px;border:1px solid #ffffff70;border-radius:50%;background:#26231fbb;color:white;font:32px/1 system-ui;cursor:pointer;align-items:center;justify-content:center;transition:opacity .25s ease}#exhibitClose:focus-visible{outline:3px solid white;outline-offset:3px}.immersive #exhibitClose,.board-wrap:fullscreen #exhibitClose{display:flex}#exhibitClose.hidden{opacity:0;visibility:hidden;pointer-events:none}#exhibitClose:not(.hidden){opacity:1;visibility:visible}
 .pattern-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.pattern-controls button{font-size:13px}.config-select,.config-name{display:block;width:100%;padding:12px;border:1px solid #b9a382;border-radius:8px;background:#fffaf1;color:#322718;font:inherit;margin:7px 0 14px}.config-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.config-actions #deleteConfig{grid-column:1/-1}label.subhead{display:block} 
 </style><!-- Nonvisual maintenance update: retrigger GitHub Pages deployment. -->
 </head><body>
 <svg width="0" height="0" style="position:absolute"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".018 .35" numOctaves="2" seed="9" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/></filter></svg>
-<main><h1>Interactive Wood Sculpture</h1><p>Design your wood wall hanging in a 3 × 3, 4 × 4, or 5 × 5 grid. Each wooden square shows a real photographed wood panel with a painted straight stripe or a right-angle corner. Select a tile, change its pattern, and rotate it in 90° steps. Triple-tap a tile to cycle through the straight, corner, and blank wood panels.</p>
+<main><h1>Interactive Wood Sculpture</h1><p>Design your wood wall hanging in a 3 × 3, 4 × 4, or 5 × 5 grid. Each wooden square shows a real photographed wood panel with a painted straight stripe or a right-angle corner. Select a tile, change its pattern, and rotate it in 90° steps. Drag your finger through neighboring tiles to draw a connected route: each crossed tile becomes a correctly oriented straight or corner. Triple-tap a tile to cycle through the straight, corner, and blank wood panels.</p>
 <div class="layout"><div class="board-wrap" id="exhibit" aria-label="Sculpture against selected wall color"><div id="board" class="board" role="group" aria-label="16 adjustable wooden tiles"></div><button type="button" id="exhibitClose" aria-label="Close maximized view" title="Close maximized view">×</button></div>
 <aside><h2>Display options</h2><div class="subhead">Grid size</div><div class="grid-size-options" role="group" aria-label="Grid size"><button type="button" class="control" data-grid-size="3">3 × 3</button><button type="button" class="control" data-grid-size="4">4 × 4</button><button type="button" class="control" data-grid-size="5">5 × 5</button></div><button class="control primary" id="maximize" style="width:100%">⛶ Maximize sculpture</button><div class="subhead">Wall color</div><div id="wallColors" class="wall-colors" role="group" aria-label="Choose wall background color"></div><div id="wallName" class="wall-name" aria-live="polite"></div><p class="foot">Tap the wall once to change its color and reveal the close button for five seconds. Double-tap the wall or press the × button to exit maximized view.</p><hr><h2>Selected wooden tile</h2><div id="readout" class="readout" aria-live="polite"></div>
 <div class="subhead">Wood panel design</div><div class="pattern-controls"><button class="control primary" id="straight">Straight stripe</button><button class="control primary" id="corner">Right angle</button><button class="control primary" id="blank">Blank wood</button></div>
 <div class="subhead">Orientation</div><div class="controls"><button class="control" id="left">↶ Rotate left 90°</button><button class="control" id="right">↷ Rotate right 90°</button></div>
 <div class="subhead">Whole sculpture</div><div class="controls"><button class="control" id="shuffle">Shuffle</button><button class="control" id="reset">Reset</button><button class="control" id="save">Save design</button><button class="control" id="load">Restore saved</button><button class="control" id="export">Export design</button><button class="control" id="clear">All straight</button></div>
-<hr><h2>Saved configurations</h2><label class="subhead" for="configSelect">Choose a design</label><select id="configSelect" class="config-select" aria-label="Saved configurations"><option value="">Select saved design…</option></select><label class="subhead" for="configName">Configuration name</label><input id="configName" class="config-name" type="text" maxlength="70" placeholder="e.g. Flowing River"><div class="config-actions"><button type="button" class="control primary" id="saveNamed">Save to device</button><button type="button" class="control" id="loadNamed">Load selected</button><button type="button" class="control" id="downloadConfig">Download settings file</button><button type="button" class="control" id="importConfig">Import settings file</button><button type="button" class="control" id="deleteConfig">Delete selected</button></div><input id="importFile" type="file" accept=".json,application/json" hidden><p class="foot">Saved designs remain in this browser on this device. Download a JSON settings file to back them up or move them to another device.</p><div class="foot">Tip: Tap an unselected tile to select it. Tap the selected tile again to rotate it clockwise. Triple-tap a tile to cycle through straight, corner, and blank designs. Your saved design stays in this browser. The wall color is saved separately. Tap the surrounding wall to try the next color.</div><div id="feedback" role="status"></div></aside></div><footer>Prototype for a physical, configurable wooden wall hanging. Tile arrangements are visual plans, not machining dimensions.</footer></main>
+<hr><h2>Saved configurations</h2><label class="subhead" for="configSelect">Choose a design</label><select id="configSelect" class="config-select" aria-label="Saved configurations"><option value="">Select saved design…</option></select><label class="subhead" for="configName">Configuration name</label><input id="configName" class="config-name" type="text" maxlength="70" placeholder="e.g. Flowing River"><div class="config-actions"><button type="button" class="control primary" id="saveNamed">Save to device</button><button type="button" class="control" id="loadNamed">Load selected</button><button type="button" class="control" id="downloadConfig">Download settings file</button><button type="button" class="control" id="importConfig">Import settings file</button><button type="button" class="control" id="deleteConfig">Delete selected</button></div><input id="importFile" type="file" accept=".json,application/json" hidden><p class="foot">Saved designs remain in this browser on this device. Download a JSON settings file to back them up or move them to another device.</p><div class="foot"><strong>Draw with your finger:</strong> Drag from one tile through adjacent tiles. The image follows the route automatically, turning where your finger turns. To edit a single piece, use the regular tap controls. Tip: Tap an unselected tile to select it. Tap the selected tile again to rotate it clockwise. Triple-tap a tile to cycle through straight, corner, and blank designs. Your saved design stays in this browser. The wall color is saved separately. Tap the surrounding wall to try the next color.</div><div id="feedback" role="status"></div></aside></div><footer>Prototype for a physical, configurable wooden wall hanging. Tile arrangements are visual plans, not machining dimensions.</footer></main>
 <script>
 const exhibit=document.querySelector('#exhibit');
 const board=document.querySelector('#board'),readout=document.querySelector('#readout'),feedback=document.querySelector('#feedback');
@@ -107,6 +107,123 @@ exhibit.addEventListener('click',e=>{
   },320);
 });
 const path={straight:'<path d="M50 0 V100" fill="none" stroke="#19212a" stroke-width="13"/>',corner:'<path d="M0 50 H50 V100" fill="none" stroke="#19212a" stroke-width="13" stroke-linejoin="miter"/>'};
+// Finger-drawn routes: crossing adjacent tile edges chooses each tile's ports.
+const OPPOSITE={top:'bottom',bottom:'top',left:'right',right:'left'};
+let stroke=null,ignoreClickUntil=0;
+function gridTileAt(x,y){
+  const nodes=board.querySelectorAll('.tile');
+  for(let i=0;i<nodes.length;i++){
+    const r=nodes[i].getBoundingClientRect();
+    if(x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom)return i;
+  }
+  return -1;
+}
+function directionBetween(a,b){
+  const ar=Math.floor(a/gridSize),ac=a%gridSize,br=Math.floor(b/gridSize),bc=b%gridSize;
+  if(br===ar-1&&bc===ac)return 'top';
+  if(br===ar+1&&bc===ac)return 'bottom';
+  if(bc===ac-1&&br===ar)return 'left';
+  if(bc===ac+1&&br===ar)return 'right';
+  return null;
+}
+function tileForSides(a,b){
+  if((a==='top'&&b==='bottom')||(a==='bottom'&&b==='top'))return {pattern:'straight',rotation:0};
+  if((a==='left'&&b==='right')||(a==='right'&&b==='left'))return {pattern:'straight',rotation:90};
+  // Unrotated right-angle photo connects left and bottom.
+  const sides=[a,b].sort().join('-');
+  const angle={'bottom-left':0,'left-top':90,'right-top':180,'bottom-right':270}[sides];
+  return angle===undefined?null:{pattern:'corner',rotation:angle};
+}
+function refreshRoute(){
+  if(!stroke||!stroke.moved)return;
+  const path=stroke.path;
+  const sideMap=new Map();
+  function record(i,side){
+    if(!sideMap.has(i))sideMap.set(i,[]);
+    const a=sideMap.get(i);
+    if(a[a.length-1]!==side)a.push(side);
+    if(a.length>2)a.shift();
+  }
+  for(let j=1;j<path.length;j++){
+    const prev=path[j-1],next=path[j];
+    const dir=directionBetween(prev,next);
+    if(!dir)continue;
+    record(prev,dir);
+    record(next,OPPOSITE[dir]);
+  }
+  if(path.length===1){
+    const i=path[0],dx=stroke.lastX-stroke.startX,dy=stroke.lastY-stroke.startY;
+    if(Math.abs(dx)<9&&Math.abs(dy)<9)return;
+    const rect=board.children[i]?.getBoundingClientRect();if(!rect)return;
+    const nearest=(x,y)=>{
+      const d={left:Math.abs(x-rect.left),right:Math.abs(rect.right-x),top:Math.abs(y-rect.top),bottom:Math.abs(rect.bottom-y)};
+      return Object.keys(d).sort((a,b)=>d[a]-d[b])[0];
+    };
+    let entry=nearest(stroke.startX,stroke.startY),exit=nearest(stroke.lastX,stroke.lastY);
+    if(entry===exit){
+      entry=Math.abs(dx)>=Math.abs(dy)?(dx>0?'left':'right'):(dy>0?'top':'bottom');
+      exit=OPPOSITE[entry];
+    }
+    sideMap.set(i,[entry,exit]);
+  }
+  for(const [i,sides] of sideMap){
+    if(!sides.length)continue;
+    const a=sides[0],b=sides[1]||OPPOSITE[a];
+    const tile=tileForSides(a,b);
+    if(tile)Object.assign(tiles[i],tile);
+  }
+  selected=path[path.length-1];
+  draw();
+}
+function appendRouteTile(i){
+  const path=stroke.path,last=path[path.length-1];
+  if(i<0||i===last)return false;
+  const nextRow=Math.floor(i/gridSize),lastRow=Math.floor(last/gridSize);
+  if(Math.abs(nextRow-lastRow)+Math.abs(i%gridSize-last%gridSize)!==1)return false;
+  path.push(i);return true;
+}
+function processStrokePosition(x,y){
+  if(!stroke)return;
+  const dx=x-stroke.lastX,dy=y-stroke.lastY;
+  const steps=Math.max(1,Math.ceil(Math.hypot(dx,dy)/5));
+  let changed=false;
+  for(let j=1;j<=steps;j++){
+    const px=stroke.lastX+dx*j/steps,py=stroke.lastY+dy*j/steps;
+    const idx=gridTileAt(px,py);
+    if(idx>=0&&appendRouteTile(idx))changed=true;
+  }
+  stroke.lastX=x;stroke.lastY=y;
+  if(changed)refreshRoute();
+}
+board.addEventListener('pointerdown',e=>{
+  if(e.button!==0||stroke)return;
+  const tile=e.target.closest('.tile');if(!tile||!board.contains(tile))return;
+  if(pendingTile!==-1){clearTimeout(tapTimer);pendingTile=-1;tapCount=0;tapTimer=null}
+  const index=Array.prototype.indexOf.call(board.children,tile);
+  if(index<0)return;
+  stroke={pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,lastX:e.clientX,lastY:e.clientY,path:[index],moved:false};
+});
+document.addEventListener('pointermove',e=>{
+  if(!stroke||e.pointerId!==stroke.pointerId)return;
+  if(!stroke.moved&&Math.hypot(e.clientX-stroke.startX,e.clientY-stroke.startY)<12)return;
+  if(!stroke.moved){stroke.moved=true;board.classList.add('drawing');}
+  if(e.cancelable)e.preventDefault();
+  processStrokePosition(e.clientX,e.clientY);
+},{passive:false});
+function finishStroke(e){
+  if(!stroke||e.pointerId!==stroke.pointerId)return;
+  if(stroke.moved){
+    processStrokePosition(e.clientX,e.clientY);
+    refreshRoute();
+    ignoreClickUntil=Date.now()+500;
+    feedback.textContent='Path drawn across '+new Set(stroke.path).size+' wooden panels.';
+  }
+  stroke=null;board.classList.remove('drawing');
+}
+document.addEventListener('pointerup',finishStroke);
+document.addEventListener('pointercancel',finishStroke);
+board.addEventListener('click',e=>{if(Date.now()<ignoreClickUntil){e.preventDefault();e.stopImmediatePropagation()}},true);
+
 // Group rapid taps to distinguish a single rotation from a triple-tap pattern change.
 let pendingTile=-1, tapCount=0, tapTimer=null;
 function applyTaps(){

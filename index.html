@@ -7,17 +7,33 @@
 .wall-colors{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:10px 0}.wall-swatch{width:100%;aspect-ratio:1;border:2px solid #5b504344;border-radius:9px;cursor:pointer;box-shadow:inset 0 1px 2px #fff4}.wall-swatch.active{outline:3px solid #9d7535;outline-offset:2px}.wall-swatch:focus-visible{outline:3px solid #0060bc;outline-offset:2px}.wall-name{font-size:13px;color:#645342;margin-bottom:12px}.board-wrap{background:var(--wall-color,#F1E8D8);padding:clamp(14px,3vw,30px);display:flex;align-items:center;justify-content:center;transition:background .2s}.board{width:100%}.board-wrap:fullscreen{width:100vw;height:100dvh;max-width:none;max-height:none;padding:clamp(20px,5vmin,80px);border:0;border-radius:0;background:var(--wall-color,#F1E8D8);box-shadow:none}.board-wrap:fullscreen .board{width:min(84vw,84dvh);max-height:84dvh}.board-wrap:fullscreen .tile.selected,.immersive .tile.selected{outline:0}.immersive #exhibit{position:fixed;z-index:1000;inset:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;padding:clamp(20px,5vmin,80px);border:0;border-radius:0;box-shadow:none;background:var(--wall-color,#F1E8D8)}.immersive #exhibit .board{width:min(84vw,84dvh);max-height:84dvh}.immersive{overflow:hidden}@media(max-width:600px){.immersive #exhibit .board{width:min(94vw,84dvh)}.board-wrap:fullscreen .board{width:min(94vw,84dvh)}}
 .grid-size-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 18px}.grid-size-options button.active{background:#4d3825;color:white;border-color:#4d3825}.board,.tile{touch-action:none;-webkit-user-select:none;user-select:none}.board.drawing .tile{cursor:crosshair}.board.drawing{outline:3px solid #eac76a;outline-offset:2px} 
 #exhibit{position:relative}#exhibitClose{display:none;position:absolute;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));z-index:30;width:46px;height:46px;border:1px solid #ffffff70;border-radius:50%;background:#26231fbb;color:white;font:32px/1 system-ui;cursor:pointer;align-items:center;justify-content:center;transition:opacity .25s ease}#exhibitClose:focus-visible{outline:3px solid white;outline-offset:3px}.immersive #exhibitClose,.board-wrap:fullscreen #exhibitClose{display:flex}#exhibitClose.hidden{opacity:0;visibility:hidden;pointer-events:none}#exhibitClose:not(.hidden){opacity:1;visibility:visible}
-.theme-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:9px 0 17px}.theme-option{min-width:0;cursor:pointer;border:2px solid #b9a382;border-radius:9px;padding:6px;background:#fffaf1;color:#322718;font:600 12px/1.35 system-ui;text-align:center}.theme-option img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;display:block;margin-bottom:6px}.theme-option.active{border-color:#4d3825;box-shadow:0 0 0 2px #4d382538;background:#efe1cc}.theme-option:focus-visible{outline:3px solid #0060bc;outline-offset:2px}.pattern-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.pattern-controls button{font-size:13px}.config-select,.config-name{display:block;width:100%;padding:12px;border:1px solid #b9a382;border-radius:8px;background:#fffaf1;color:#322718;font:inherit;margin:7px 0 14px}.config-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.config-actions #deleteConfig{grid-column:1/-1}label.subhead{display:block} 
+.theme-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:9px 0 17px}.theme-option{min-width:0;cursor:pointer;border:2px solid #b9a382;border-radius:9px;padding:6px;background:#fffaf1;color:#322718;font:600 12px/1.35 system-ui;text-align:center}.theme-option img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;display:block;margin-bottom:6px}.theme-option.active{border-color:#4d3825;box-shadow:0 0 0 2px #4d382538;background:#efe1cc}.theme-option:focus-visible{outline:3px solid #0060bc;outline-offset:2px}.pattern-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.pattern-controls button{font-size:13px}.config-select,.config-name{display:block;width:100%;padding:12px;border:1px solid #b9a382;border-radius:8px;background:#fffaf1;color:#322718;font:inherit;margin:7px 0 14px}.config-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.config-actions #deleteConfig{grid-column:1/-1}label.subhead{display:block}
+
+/* PWA-UPDATE-SYSTEM v2 */
+[hidden]{display:none!important}
+.update-bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;background:#fffdf9;border:1.5px solid #4d3825;border-radius:8px;padding:12px 14px;font-size:14px;margin:0 0 20px}
+.appfoot{max-width:1060px;margin:8px auto 24px;padding:0 18px calc(8px + env(safe-area-inset-bottom, 0px));display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;font-size:13px;color:#796c5d}
 </style><!-- Nonvisual maintenance update: retrigger GitHub Pages deployment. -->
 </head><body>
 <svg width="0" height="0" style="position:absolute"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".018 .35" numOctaves="2" seed="9" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/></filter></svg>
 <main><h1>Interactive Wood Sculpture</h1><p>Design your wood wall hanging in a 3 × 3, 4 × 4, or 5 × 5 grid. Each wooden square shows a real photographed wood panel with a painted straight stripe or a right-angle corner. Select a tile, change its pattern, and rotate it in 90° steps. Drag your finger through neighboring tiles to draw a connected route: each crossed tile becomes a correctly oriented straight or corner. Triple-tap a tile to cycle through the straight, corner, and blank wood panels.</p>
+<!-- PWA-UPDATE-SYSTEM v2 -->
+<div class="update-bar" id="updateBar" role="status" aria-live="polite" hidden>
+  <span id="updateText">A new version of Interactive Wood Sculpture is ready. Your design and saved work are kept.</span>
+  <span style="display:flex;gap:9px;flex-wrap:wrap"><button class="control primary" id="updateNow">Update now</button><button class="control" id="updateLater">Later</button></span>
+</div>
 <div class="layout"><div class="board-wrap" id="exhibit" aria-label="Sculpture against selected wall color"><div id="board" class="board" role="group" aria-label="16 adjustable wooden tiles"></div><button type="button" id="exhibitClose" aria-label="Close maximized view" title="Close maximized view">×</button></div>
 <aside><h2>Display options</h2><div class="subhead">Wood theme</div><div id="themeOptions" class="theme-options" role="group" aria-label="Choose wood theme"></div><div class="subhead">Grid size</div><div class="grid-size-options" role="group" aria-label="Grid size"><button type="button" class="control" data-grid-size="3">3 × 3</button><button type="button" class="control" data-grid-size="4">4 × 4</button><button type="button" class="control" data-grid-size="5">5 × 5</button></div><button class="control primary" id="maximize" style="width:100%">⛶ Maximize sculpture</button><div class="subhead">Wall color</div><div id="wallColors" class="wall-colors" role="group" aria-label="Choose wall background color"></div><div id="wallName" class="wall-name" aria-live="polite"></div><p class="foot">Tap the wall once to change its color and reveal the close button for five seconds. Double-tap the wall or press the × button to exit maximized view.</p><hr><h2>Selected wooden tile</h2><div id="readout" class="readout" aria-live="polite"></div>
 <div class="subhead">Wood panel design</div><div class="pattern-controls"><button class="control primary" id="straight">Straight stripe</button><button class="control primary" id="corner">Right angle</button><button class="control primary" id="blank">Blank wood</button></div>
 <div class="subhead">Orientation</div><div class="controls"><button class="control" id="left">↶ Rotate left 90°</button><button class="control" id="right">↷ Rotate right 90°</button></div>
 <div class="subhead">Whole sculpture</div><div class="controls"><button class="control" id="shuffle">Shuffle</button><button class="control" id="reset">Reset</button><button class="control" id="save">Save design</button><button class="control" id="load">Restore saved</button><button class="control" id="export">Export design</button><button class="control" id="clear">All straight</button></div>
 <hr><h2>Saved configurations</h2><label class="subhead" for="configSelect">Choose a design</label><select id="configSelect" class="config-select" aria-label="Saved configurations"><option value="">Select saved design…</option></select><label class="subhead" for="configName">Configuration name</label><input id="configName" class="config-name" type="text" maxlength="70" placeholder="e.g. Flowing River"><div class="config-actions"><button type="button" class="control primary" id="saveNamed">Save to device</button><button type="button" class="control" id="loadNamed">Load selected</button><button type="button" class="control" id="downloadConfig">Download settings file</button><button type="button" class="control" id="importConfig">Import settings file</button><button type="button" class="control" id="deleteConfig">Delete selected</button></div><input id="importFile" type="file" accept=".json,application/json" hidden><p class="foot">Saved designs remain in this browser on this device. Download a JSON settings file to back them up or move them to another device.</p><div class="foot"><strong>Draw with your finger:</strong> Drag from one tile through adjacent tiles. The image follows the route automatically, turning where your finger turns. To edit a single piece, use the regular tap controls. Tip: Tap an unselected tile to select it. Tap the selected tile again to rotate it clockwise. Triple-tap a tile to cycle through straight, corner, and blank designs. Your saved design stays in this browser. The wall color is saved separately. Tap the surrounding wall to try the next color.</div><div id="feedback" role="status"></div></aside></div><footer>Prototype for a physical, configurable wooden wall hanging. Tile arrangements are visual plans, not machining dimensions.</footer></main>
+<!-- PWA-UPDATE-SYSTEM v2 -->
+<footer class="appfoot">
+  <span>Interactive Wood Sculpture <b>v<span id="appVersion"></span></b></span>
+  <span id="updateStatus"></span>
+  <button class="control" id="checkUpdates" hidden>Check for updates</button>
+</footer>
 <script>
 const WOOD_THEMES=[
  {id:'original',name:'Original Wood',files:{straight:'straight-panel.png',corner:'corner-panel.png',blank:'blank-panel.png'}},
@@ -351,5 +367,292 @@ importFile.addEventListener('change',async()=>{
 refreshConfigList();
 
 draw();
-if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script>
+<script>
+// PWA-UPDATE-SYSTEM v2: auto-update, version banner, Check for updates. Do not remove this line.
+const APP_RELEASE='1.0.0-20261126-1';
+const APP_VERSION='1.0.0';
+(function(){
+  var PENDING_KEY = 'wood-sculpture-pending-update-v2';
+  var LATER_KEY = 'interactive-wood-sculpture-update-later-v2';
+  var BC_NAME = 'interactive-wood-sculpture-update-v2';
+
+  // Restore work stashed just before an update (see applyUpdate).
+  // Runs before anything else: the main script has already run, so
+  // snapshot / applySettings / draw are available. The stashed design
+  // is applied with the app's own applySettings, so the reloaded page
+  // shows exactly the design that was on screen, without touching
+  // the saved 'wood-sculpture-v2' slot.
+  try {
+    var pendingRaw = null;
+    try { pendingRaw = localStorage.getItem(PENDING_KEY); } catch (e) {}
+    if (pendingRaw) {
+      var pending = JSON.parse(pendingRaw);
+      applySettings(pending);
+      try { localStorage.removeItem(PENDING_KEY); } catch (e) {}
+      document.getElementById('feedback').textContent = 'Your unsaved design was kept through the update. Tap Save design to keep it.';
+    }
+  } catch (e) { try { localStorage.removeItem(PENDING_KEY); } catch (e2) {} }
+
+  document.getElementById('appVersion').textContent = APP_VERSION;
+  var status = document.getElementById('updateStatus'), checkBtn = document.getElementById('checkUpdates'), bar = document.getElementById('updateBar');
+  var say = function(t){ status.textContent = t; };
+  if (!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
+  checkBtn.hidden = false;
+
+  var reg = null, reloading = false, updating = false;
+  var remote = null, pendingRelease = null, checkPromise = null;
+  var tabId = 'tab-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+
+  // Unsaved work: the live design (all three grid layouts, grid size,
+  // theme) differs from the saved 'wood-sculpture-v2' slot. Wall color,
+  // theme and grid size are written to localStorage the moment they
+  // change, so only the tile arrangements can be unsaved. A design
+  // that was never saved counts as unsaved.
+  function normDesign(d){
+    var out = { gridSize: d.gridSize, theme: d.theme, layouts: {} };
+    [3, 4, 5].forEach(function(n){
+      var arr = (d.layouts && d.layouts[n]) || [];
+      out.layouts[n] = arr.map(function(t){ return { pattern: t.pattern, rotation: t.rotation }; });
+    });
+    return JSON.stringify(out);
+  }
+  function currentDesignKey(){
+    try { return normDesign(snapshot()); } catch (e) { return null; }
+  }
+  function isDirty(){
+    try {
+      var current = currentDesignKey();
+      if (current === null) return true;
+      var raw = null;
+      try { raw = localStorage.getItem('wood-sculpture-v2'); } catch (e) {}
+      if (!raw) return true;
+      return normDesign(JSON.parse(raw)) !== current;
+    } catch (e) { return true; }
+  }
+  function clearPending(){
+    try { localStorage.removeItem(PENDING_KEY); } catch (e) {}
+  }
+
+  // Multi-tab coordination over BroadcastChannel.
+  var bc = null, bcWaiters = {};
+  try { if ('BroadcastChannel' in window) bc = new BroadcastChannel(BC_NAME); } catch (e) {}
+  if (bc) bc.onmessage = function(ev){
+    var d = ev.data || {};
+    if (d.type === 'update-query' && d.from !== tabId) {
+      try { bc.postMessage({ type: 'update-response', id: d.id, from: tabId, blocked: isDirty() }); } catch (e) {}
+    } else if (d.type === 'update-response' && bcWaiters[d.id]) {
+      bcWaiters[d.id].push(d);
+    }
+  };
+  function queryTabs(release){
+    return new Promise(function(resolve){
+      if (!bc) return resolve([]);
+      var id = 'q-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+      var answers = [];
+      bcWaiters[id] = answers;
+      try { bc.postMessage({ type: 'update-query', id: id, from: tabId, release: release }); } catch (e) {}
+      setTimeout(function(){ delete bcWaiters[id]; resolve(answers); }, 800);
+    });
+  }
+
+  function workerVersion(worker, ms){
+    return new Promise(function(resolve){
+      if (!worker || !('MessageChannel' in window)) return resolve(null);
+      var done = false, timer = null;
+      try {
+        var ch = new MessageChannel();
+        timer = setTimeout(function(){ if (!done) { done = true; resolve(null); } }, ms);
+        ch.port1.onmessage = function(ev){
+          if (done) return; done = true; clearTimeout(timer);
+          var d = ev.data || {};
+          resolve((d.release && d.displayVersion) ? d : null);
+        };
+        worker.postMessage({ type: 'GET_VERSION' }, [ch.port2]);
+      } catch (e) { if (timer) clearTimeout(timer); resolve(null); }
+    });
+  }
+  function workerClientCount(worker){
+    return new Promise(function(resolve){
+      if (!worker || !('MessageChannel' in window)) return resolve(null);
+      var done = false, timer = null;
+      try {
+        var ch = new MessageChannel();
+        timer = setTimeout(function(){ if (!done) { done = true; resolve(null); } }, 2000);
+        ch.port1.onmessage = function(ev){
+          if (done) return; done = true; clearTimeout(timer);
+          var d = ev.data || {};
+          resolve(typeof d.count === 'number' ? d.count : null);
+        };
+        worker.postMessage({ type: 'GET_CLIENTS' }, [ch.port2]);
+      } catch (e) { if (timer) clearTimeout(timer); resolve(null); }
+    });
+  }
+  function waitControllerChange(ms){
+    return new Promise(function(resolve){
+      var done = false;
+      var timer = setTimeout(function(){ if (!done) { done = true; resolve(false); } }, ms);
+      var onChange = function(){
+        if (done) return; done = true; clearTimeout(timer);
+        navigator.serviceWorker.removeEventListener('controllerchange', onChange);
+        resolve(true);
+      };
+      navigator.serviceWorker.addEventListener('controllerchange', onChange);
+    });
+  }
+
+  function showBar(display, release, manual){
+    if (release) pendingRelease = release;
+    var later = null;
+    try { later = sessionStorage.getItem(LATER_KEY); } catch (e) {}
+    document.getElementById('updateText').textContent = 'Interactive Wood Sculpture ' + (display ? 'v' + display + ' ' : '') + 'is ready. Updating keeps your design and saved work.';
+    if (later && release && later === release && !manual) return;
+    bar.hidden = false;
+    say('An update is ready.');
+  }
+  function fetchRemote(){
+    return fetch('version.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(function(r){ if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+      .then(function(info){ remote = (info && typeof info.release === 'string') ? info : null; return remote; })
+      .catch(function(){ remote = null; return null; });
+  }
+  function maybeShowUpdate(manual){
+    return fetchRemote().then(function(info){
+      if (reg) return reg.update().catch(function(){}).then(function(){ return info; });
+      return info;
+    }).then(function(info){
+      var w = reg && reg.waiting;
+      if (!w || !navigator.serviceWorker.controller) {
+        if (manual) {
+          if (!info) say('Could not reach the server. Try again when you are online.');
+          else if (info.release && info.release !== APP_RELEASE) say('Version ' + info.version + ' found. Downloading\u2026');
+          else say('You have the latest version (' + APP_VERSION + ').');
+        }
+        return false;
+      }
+      return workerVersion(w, 2000).then(function(verified){
+        if (verified) {
+          if (info && info.release && verified.release !== info.release) {
+            if (manual) say('The downloaded update did not match the published release. Try again.');
+            return false;
+          }
+          showBar(verified.displayVersion, verified.release, manual);
+          if (manual) say('An update is ready.');
+          return true;
+        }
+        // Handshake failed: show the banner, but name no version.
+        showBar(null, info && info.release, manual);
+        if (manual) say('An update is ready.');
+        return true;
+      });
+    });
+  }
+  function check(manual){
+    if (checkPromise) return checkPromise;
+    if (manual) { say('Checking\u2026'); checkBtn.disabled = true; }
+    checkPromise = maybeShowUpdate(manual).catch(function(){ return false; }).then(function(ok){
+      checkPromise = null;
+      if (manual) checkBtn.disabled = false;
+      return ok;
+    });
+    return checkPromise;
+  }
+  function track(w){
+    if (!w) return;
+    w.addEventListener('statechange', function(){
+      if (w.state === 'installed') check(false);
+    });
+  }
+
+  async function applyUpdate(){
+    if (updating) return;
+    updating = true;
+    try {
+      var w = reg && reg.waiting;
+      if (!w) { say('No update is waiting. Tap Check for updates first.'); return; }
+      var expected = pendingRelease || (remote && remote.release);
+      // 1. Coordinate with other tabs of this app, before this tab
+      // writes anything: a tab with an unsaved design blocks the
+      // update — its user is not looking at this tab to consent, and
+      // a reload there would lose work the pending stash cannot see.
+      say('Checking other tabs\u2026');
+      var answers = await queryTabs(expected);
+      if (answers.some(function(a){ return a.blocked; })) {
+        say('Another Interactive Wood Sculpture tab has unsaved work \u2014 save it there first, or close that tab.');
+        return;
+      }
+      if (answers.length === 0) {
+        var count = await workerClientCount(w);
+        if (count !== 1) {
+          say('Another Interactive Wood Sculpture tab is open and couldn\u2019t confirm it\u2019s safe.');
+          return;
+        }
+      }
+      // 2. Protect this tab's unsaved work before anything moves.
+      // The live design is stashed with the app's own snapshot()
+      // and restored on the reloaded page (see the top of this
+      // script). The saved 'wood-sculpture-v2' slot is left alone,
+      // so an in-progress design never overwrites a saved one.
+      if (isDirty()) {
+        try {
+          var snap = snapshot();
+          localStorage.setItem(PENDING_KEY, JSON.stringify(snap));
+          var back = JSON.parse(localStorage.getItem(PENDING_KEY));
+          if (normDesign(back) !== currentDesignKey()) throw new Error('stash mismatch');
+        } catch (e) {
+          clearPending();
+          say('Could not keep your unsaved design \u2014 tap Save design first, then try again.');
+          return;
+        }
+      }
+      // 3. Activate only the specific waiting worker.
+      say('Updating\u2026');
+      var changed = waitControllerChange(8000);
+      w.postMessage({ type: 'SKIP_WAITING' });
+      var ok = await changed;
+      if (!ok) {
+        clearPending();
+        say('The update did not start. Tap Update now to try again, or Later to defer it.');
+        return;
+      }
+      // 4. Verify the new controller really is the expected release,
+      // then reload exactly once. No blind reload fallback exists.
+      var info = await workerVersion(navigator.serviceWorker.controller, 2000);
+      if (!info || (expected && info.release !== expected)) {
+        clearPending();
+        say('The update did not take over as expected. Tap Update now to try again, or Later to defer it.');
+        return;
+      }
+      if (reloading) return;
+      reloading = true;
+      location.reload();
+    } finally { updating = false; }
+  }
+
+  document.getElementById('updateNow').onclick = applyUpdate;
+  document.getElementById('updateLater').onclick = function(){
+    bar.hidden = true;
+    try { sessionStorage.setItem(LATER_KEY, pendingRelease || (remote && remote.release) || '?'); } catch (e) {}
+    say('Update postponed. You will be asked again next time you open the app, or tap Check for updates.');
+  };
+  checkBtn.onclick = function(){ check(true); };
+  // A controllerchange on its own (first install, or an update
+  // activated from another tab) never reloads this page: only an
+  // explicit Update now in this tab does, after verification in
+  // applyUpdate. There is deliberately no reload here.
+  window.addEventListener('load', async function(){
+    try { reg = await navigator.serviceWorker.register('sw.js', { updateViaCache: 'none', scope: './' }); } catch (e) { return; }
+    if (reg.waiting) check(false);
+    track(reg.installing);
+    reg.addEventListener('updatefound', function(){ track(reg.installing); });
+    check(false);
+  });
+  var last = Date.now();
+  document.addEventListener('visibilitychange', function(){
+    if (document.visibilityState === 'visible' && Date.now() - last > 5 * 60e3) { last = Date.now(); check(false); }
+  });
+  setInterval(function(){
+    if (document.visibilityState === 'visible') { last = Date.now(); check(false); }
+  }, 60 * 60e3);
+})();
 </script></body></html>
